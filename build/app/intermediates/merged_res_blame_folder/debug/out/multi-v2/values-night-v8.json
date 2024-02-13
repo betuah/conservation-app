@@ -4,7 +4,7 @@
             "outputFile": "com.example.conv_app-mergeDebugResources-9:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "D:\\Kuliah\\Semester 8\\.Projek\\Mobile_ConversationApp\\conv_app\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "D:\\Kuliah\\Semester 8\\SEAMOLEC\\conservation-app\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
