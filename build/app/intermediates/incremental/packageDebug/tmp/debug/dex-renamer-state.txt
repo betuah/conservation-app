@@ -1,0 +1,4 @@
+#Tue Feb 13 08:34:04 WIB 2024
+base.0=D\:\\Kuliah\\Semester 8\\.Projek\\Mobile_ConversationApp\\conv_app\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
