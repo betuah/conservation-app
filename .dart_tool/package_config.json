@@ -62,6 +62,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "flutter_dotenv",
+      "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_dotenv-5.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-2.0.3",
       "packageUri": "lib/",
@@ -290,7 +296,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-03-07T14:36:46.510734Z",
+  "generated": "2024-03-08T12:10:07.753130Z",
   "generator": "pub",
   "generatorVersion": "3.2.6"
 }

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'openai.dart';
 //import 'package:text_to_speech/text_to_speech.dart';
 
 class RecordChatPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class RecordChatPage extends StatefulWidget {
 
 class _RecordChatPageState extends State<RecordChatPage> {
   final List<String> _chatMessages = [];
-  bool _isRecording = false;
+  bool _isStart = false;
   bool _isListening = false;
   late String _micIconText = 'Tap To Speak';
   final SpeechToText _speechToText = SpeechToText();
@@ -36,16 +37,16 @@ class _RecordChatPageState extends State<RecordChatPage> {
     });
   }
 
-  void _startRecording() {
+  void _start() {
     setState(() {
-      _isRecording = true;
+      _isStart = true;
       _chatMessages.insert(0, 'AI: Hello, Can I help you?');
     });
   }
 
-  void _stopRecording() {
+  void _stop() {
     setState(() {
-      _isRecording = false;
+      _isStart = false;
       _chatMessages.clear();
     });
   }
@@ -64,7 +65,7 @@ class _RecordChatPageState extends State<RecordChatPage> {
     });
   }
 
-  void _onSpeechResult(result) {
+  Future<void> _onSpeechResult(result) async {
     setState(() {
       if (_isListening) {
         _micIconText = 'IsListening';
@@ -73,6 +74,15 @@ class _RecordChatPageState extends State<RecordChatPage> {
         _chatMessages.insert(0, 'You: ${result.recognizedWords}');
       }
     });
+
+    if (!_isListening) {
+      // Send speech-to-text result to OpenAI API
+      String response =
+          await OpenAI.sendMessageToChatGpt(result.recognizedWords);
+      setState(() {
+        _chatMessages.insert(0, 'AI: $response');
+      });
+    }
   }
 
   @override
@@ -112,9 +122,9 @@ class _RecordChatPageState extends State<RecordChatPage> {
   }
 
   Widget _buildButton() {
-    if (!_isRecording) {
+    if (!_isStart) {
       return ElevatedButton(
-        onPressed: _startRecording,
+        onPressed: _start,
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
         ),
@@ -128,12 +138,11 @@ class _RecordChatPageState extends State<RecordChatPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
-            onPressed: _startRecording,
+            onPressed: _start,
             icon: const Icon(Icons.refresh),
             color: Colors.black,
           ),
           IconButton(
-            //onPressed: _micPressed,
             onPressed:
                 _speechToText.isListening ? _stopListening : _startListening,
             icon:
@@ -142,7 +151,7 @@ class _RecordChatPageState extends State<RecordChatPage> {
             tooltip: _micIconText,
           ),
           IconButton(
-            onPressed: _stopRecording,
+            onPressed: _stop,
             icon: const Icon(Icons.stop),
             color: Colors.black,
           ),
