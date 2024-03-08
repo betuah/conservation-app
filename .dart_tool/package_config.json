@@ -74,6 +74,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///C:/src/flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "google_fonts",
       "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/google_fonts-6.1.0",
       "packageUri": "lib/",
@@ -90,6 +96,18 @@
       "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "js",
+      "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.7.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
+      "name": "json_annotation",
+      "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/json_annotation-4.8.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "lints",
@@ -158,6 +176,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "pedantic",
+      "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/pedantic-1.11.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "platform",
       "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.4",
       "packageUri": "lib/",
@@ -180,6 +204,24 @@
       "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "speech_to_text",
+      "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/speech_to_text-6.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "speech_to_text_macos",
+      "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/speech_to_text_macos-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "speech_to_text_platform_interface",
+      "rootUri": "file:///C:/Users/Roro/AppData/Local/Pub/Cache/hosted/pub.dev/speech_to_text_platform_interface-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "stack_trace",
@@ -248,7 +290,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-02-13T01:15:17.706823Z",
+  "generated": "2024-03-07T14:36:46.510734Z",
   "generator": "pub",
   "generatorVersion": "3.2.6"
 }
