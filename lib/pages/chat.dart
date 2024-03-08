@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import 'openai.dart';
+import 'openai-try.dart';
 //import 'package:text_to_speech/text_to_speech.dart';
 
 class RecordChatPage extends StatefulWidget {
