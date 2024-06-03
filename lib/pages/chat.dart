@@ -1,12 +1,15 @@
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'openai.dart';
-//import 'package:text_to_speech/text_to_speech.dart';
+import 'package:elevenlabs_flutter/elevenlabs_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class RecordChatPage extends StatefulWidget {
-  const RecordChatPage({super.key});
+  const RecordChatPage({Key? key});
 
   @override
   State<RecordChatPage> createState() => _RecordChatPageState();
@@ -18,11 +21,19 @@ class _RecordChatPageState extends State<RecordChatPage> {
   bool _isListening = false;
   late String _micIconText = 'Tap To Speak';
   final SpeechToText _speechToText = SpeechToText();
+  late ElevenLabsAPI elevenLabs;
+  late AudioPlayer player; // Define AudioPlayer
+
+  // Replace 'YOUR_API_KEY' with your actual API key
+  final String apiKey = '4d8d729b8214e267dbc86dc65719a092';
 
   @override
   void initState() {
     super.initState();
+    // Initialize ElevenLabsAPI instance with API key
+    elevenLabs = ElevenLabsAPI();
     initSpeech();
+    player = AudioPlayer(); //Initialize AudioPlayer
   }
 
   void initSpeech() async {
@@ -82,6 +93,37 @@ class _RecordChatPageState extends State<RecordChatPage> {
       setState(() {
         _chatMessages.insert(0, 'AI: $response');
       });
+
+      /// Play the synthesized text-to-speech response
+      await playTextToSpeech(response);
+    }
+  }
+
+  Future<void> playTextToSpeech(String text) async {
+    String voiceRachel =
+        '21m00Tcm4TlvDq8ikWAM'; //Rachel voice - change if you know another Voice ID
+
+    String url = 'https://api.elevenlabs.io/v1/text-to-speech/$voiceRachel';
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'accept': 'audio/mpeg',
+        'xi-api-key': apiKey,
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        "text": text,
+        "model_id": "eleven_monolingual_v1",
+        "voice_settings": {"stability": .15, "similarity_boost": .75}
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final bytes = response.bodyBytes;
+      await player.setAudioSource(MyCustomSource(bytes));
+      player.play();
+    } else {
+      // Throw Exception or handle error accordingly
     }
   }
 
@@ -90,7 +132,7 @@ class _RecordChatPageState extends State<RecordChatPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white38,
-        title: const Text('Conversation App'),
+        title: const Text('Talk to GPT'),
         titleTextStyle: const TextStyle(
           color: Colors.black,
           fontSize: 30,
@@ -185,5 +227,24 @@ class _RecordChatPageState extends State<RecordChatPage> {
             textStyle: const TextStyle(fontSize: 18, color: Colors.black),
           ),
         ));
+  }
+}
+
+// Feed your own stream of bytes into the player
+class MyCustomSource extends StreamAudioSource {
+  final List<int> bytes;
+  MyCustomSource(this.bytes);
+
+  @override
+  Future<StreamAudioResponse> request([int? start, int? end]) async {
+    start ??= 0;
+    end ??= bytes.length;
+    return StreamAudioResponse(
+      sourceLength: bytes.length,
+      contentLength: end - start,
+      offset: start,
+      stream: Stream.value(bytes.sublist(start, end)),
+      contentType: 'audio/mpeg',
+    );
   }
 }

@@ -41,6 +41,9 @@ dependencies:
   google_fonts: ^6.1.0
   flutter_dotenv: ^5.1.0
   http: ^1.2.0 
+  elevenlabs_flutter: ^0.0.1
+  just_audio: ^0.9.37
+  # audioplayers: ^0.18.3
 
 dev_dependencies:
   flutter_test:

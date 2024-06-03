@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Record & Chat App',
+      title: 'Talk to GPT',
       theme: ThemeData(
         //primaryColor: Colors.blue,
         scaffoldBackgroundColor: Colors.grey,
